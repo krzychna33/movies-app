@@ -11,3 +11,18 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
+    depends_on:
+      - movies-app-mongo
+    links:
+      - movies-app-mongo
+    environment:
+      MONGO_ADDRESS: movies-app-mongo
+
+  movies-app-mongo:
+    container_name: movies-app-mongo
+    image: library/mongo:4.2.8-bionic
+    restart: always
+    volumes:
+      - ./data/db:/data/db
+    ports:
+      - "27017:27017"
