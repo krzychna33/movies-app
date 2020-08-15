@@ -61,7 +61,7 @@ class App {
 
     private initControllers(controllers: ControllerInterface[]) {
         controllers.forEach((controller) => {
-            this.app.use(`/api/v1${controller.route}`, controller.router)
+            this.app.use(`/api/v1${controller.route}`, controller.router);
         });
     }
 
@@ -80,4 +80,4 @@ export const app: App = new App([
     new MoviesController(new MoviesService()),
 ]);
 
-app.listen()
+app.listen();
