@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  movies-app-backend:
+    container_name: movies-app-backend
+    image: movies-app-backend:latest
+    restart: always
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
