@@ -15,13 +15,8 @@ rm:
 rebuild: stop rm build-all run
 
 test:
-	@docker exec -t rma npm run test
-
-test-u:
-	@docker exec -t rma npm run test -- -u
-
-build-server:
-	@docker exec -t rma npm run build:server
+	@docker exec -t movies-app-backend chmod 777 /app/runTests.sh
+	@docker exec -t movies-app-backend /bin/sh -c "./runTests.sh"
 
 attach-console:
 	@docker logs --follow $(movies-app-backend-id)

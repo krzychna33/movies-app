@@ -1,5 +1,5 @@
 import mongoose, {Schema, Document} from "mongoose";
-import {Movie} from "./MovieInterface";
+import {Movie, MovieDocument} from "./MovieInterface";
 
 const movieDetailsSchema = new Schema({
     runtime: {
@@ -28,12 +28,12 @@ const movieSchema = new Schema({
         required: true
     },
     year: {
-        type: String,
+        type: Number,
         required: true
     },
     details: movieDetailsSchema
 });
 
-const MovieModel = mongoose.model<Movie>('Movie', movieSchema);
+const MovieModel = mongoose.model<MovieDocument>('Movie', movieSchema);
 
 export default MovieModel;

@@ -31,5 +31,13 @@
     "mongoose": "^5.10.0",
     "ts-node-dev": "^1.0.0-pre.57",
     "typescript": "^3.9.7"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.2.12",
+    "@types/mocha": "^8.0.2",
+    "@types/supertest": "^2.0.10",
+    "chai": "^4.2.0",
+    "mocha": "^8.1.1",
+    "supertest": "^4.0.2"
   }
 }

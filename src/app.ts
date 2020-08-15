@@ -24,7 +24,7 @@ class App {
     }
 
     private loadConfig() {
-        // validateEnv();
+        validateEnv();
         const env = process.env.NODE_ENV || "development";
         console.log(`[APP] Loaded ${env} environment!`)
 
@@ -32,6 +32,8 @@ class App {
             require('dotenv').config({path: ".env"});
         } else if (env === "production") {
             require('dotenv').config({path: ".env.prod"});
+        } else if (env === "test") {
+            require('dotenv').config({path: ".env.test"});
         }
     }
 
@@ -41,7 +43,13 @@ class App {
     }
 
     private connectWithDatabase() {
-        const connectionUri = `mongodb://${process.env.MONGO_ADDRESS}:27017/movies-app`;
+        let databaseName = "movies-app";
+
+        if (process.env.NODE_ENV === "test") {
+            databaseName = "movies-app-test";
+        }
+
+        const connectionUri = `mongodb://${process.env.MONGO_ADDRESS}:27017/${databaseName}`;
         mongoose.connect(connectionUri, {
             useNewUrlParser: true,
             useFindAndModify: false,
@@ -68,7 +76,7 @@ class App {
     }
 }
 
-const app: App = new App([
+export const app: App = new App([
     new MoviesController(new MoviesService()),
 ]);
 
