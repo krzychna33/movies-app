@@ -1,21 +1,37 @@
 import MovieModel from "../../entities/Movie/MovieModel";
 import mongoose from "mongoose";
-import {Movie} from "../../entities/Movie/MovieInterface";
+import {IMovie} from "../../entities/Movie/MovieInterface";
+import {IMovieDetails} from "../../entities/Movie/MovieDetails";
+
 const {ObjectId} = mongoose.Types;
 
 const movieOneId = new ObjectId();
 const movieTwoId = new ObjectId();
 
-export const movies: Movie[] = [
+const emptyDetails: IMovieDetails = {
+    runtime: undefined,
+    genre: undefined,
+    director: undefined,
+    plot: undefined,
+    awards: undefined,
+    imdbRating: undefined,
+}
+export const movies: IMovie[] = [
     {
         _id: movieOneId.toString(),
         title: "Dummy movie 1",
-        year: 2001
+        year: 2001,
+        details: {
+            ...emptyDetails
+        }
     },
     {
         _id: movieTwoId.toString(),
         title: "Dummy movie 2",
-        year: 2002
+        year: 2002,
+        details: {
+            ...emptyDetails
+        }
     }
 ]
 

@@ -1,12 +1,12 @@
 import {Router, Request, Response, NextFunction} from "express";
-import {ControllerInterface} from "./ControllerInterface";
+import {IControllerInterface} from "./ControllerInterface";
 import MoviesService from "../services/MoviesService";
 import validatorMiddleware from "../middlewares/validator";
 import AddMovieDto from "../entities/Movie/AddMovieDto";
 import HttpException from "../exceptions/HttpException";
 
 
-export class MoviesController implements ControllerInterface {
+export class MoviesController implements IControllerInterface {
     public router: Router = Router();
     public route = "/movies";
     private moviesService: MoviesService;
