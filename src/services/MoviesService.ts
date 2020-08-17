@@ -4,12 +4,13 @@ import {AppError} from "../utilities/AppError";
 import axios from "axios";
 import mongoose from "mongoose";
 import {IMovieDetails} from "../entities/Movie/MovieDetails";
+import {IMovieDocument} from "../entities/Movie/MovieInterface";
 
 const {ObjectId} = mongoose.Types;
 
 class MoviesService {
 
-    public addNewMovie = async (body: AddMovieDto) => {
+    public addNewMovie = async (body: AddMovieDto): Promise<IMovieDocument> => {
         let movieDetails;
 
         try {
@@ -68,7 +69,7 @@ class MoviesService {
         })
     }
 
-    getAllMovies = async () => {
+    getAllMovies = async (): Promise<IMovieDocument[]> => {
         try {
             return MovieModel.find();
         } catch (e) {
@@ -76,7 +77,7 @@ class MoviesService {
         }
     }
 
-    getMovie = async (id: string) => {
+    getMovie = async (id: string): Promise<IMovieDocument> => {
         if (!ObjectId.isValid(id)) {
             throw new AppError("Invalid id", 400);
         }
