@@ -20,7 +20,7 @@ class CommentsService {
         try {
             return await comment.save();
         } catch (e) {
-            throw new AppError(e.message, 500);
+            throw new AppError(e.message, e.status);
         }
     }
 
@@ -50,7 +50,7 @@ class CommentsService {
             };
 
         } catch (e) {
-            throw new AppError(e.message, 500);
+            throw new AppError(e.message, e.status);
         }
     }
 
@@ -63,7 +63,7 @@ class CommentsService {
         try {
             return await CommentModel.find({movieId: movieId});
         } catch (e) {
-            throw new AppError(e.message, 500);
+            throw new AppError(e.message, e.status);
         }
     }
 }

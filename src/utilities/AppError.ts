@@ -7,7 +7,7 @@ export class AppError extends Error {
     constructor(message: string, status: number, errors: any = {}) {
         super(message);
         this.message = message;
-        this.status = status;
+        this.status = status ? status : 500;
         this.errors = errors;
     }
 }

@@ -30,7 +30,7 @@ export class MoviesController implements IControllerInterface {
                 count: movies.length
             });
         } catch (e) {
-            next(new HttpException(e.status || 500, e.message, e.errors));
+            next(new HttpException(e.status, e.message, e.errors));
         }
     }
     
@@ -42,7 +42,7 @@ export class MoviesController implements IControllerInterface {
                 movie
             })
         } catch (e) {
-            next(new HttpException(e.status || 500, e.message, e.errors));
+            next(new HttpException(e.status, e.message, e.errors));
         }
     }
 
@@ -55,7 +55,7 @@ export class MoviesController implements IControllerInterface {
                 movie
             });
         } catch (e) {
-            next(new HttpException(e.status || 500, e.message, e.errors))
+            next(new HttpException(e.status, e.message, e.errors))
         }
 
     }

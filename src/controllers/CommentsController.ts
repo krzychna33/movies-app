@@ -36,7 +36,7 @@ export class CommentsController implements IControllerInterface {
                 count: comments.length
             });
         } catch (e) {
-            next(new HttpException(e.status || 500, e.message, e.errors));
+            next(new HttpException(e.status, e.message, e.errors));
         }
     }
 
@@ -49,7 +49,7 @@ export class CommentsController implements IControllerInterface {
                 comment
             });
         } catch (e) {
-            next(new HttpException(e.status || 500, e.message, e.errors));
+            next(new HttpException(e.status, e.message, e.errors));
         }
     }
 
@@ -62,7 +62,7 @@ export class CommentsController implements IControllerInterface {
                 comment
             });
         } catch (e) {
-            next(new HttpException(e.status || 500, e.message, e.errors));
+            next(new HttpException(e.status, e.message, e.errors));
         }
     }
 }

@@ -27,7 +27,7 @@ class MoviesService {
         try {
             return await movie.save();
         } catch (e) {
-            throw new AppError(e.message, 500);
+            throw new AppError(e.message, e.status);
         }
 
     }
@@ -72,7 +72,7 @@ class MoviesService {
         try {
             return MovieModel.find();
         } catch (e) {
-            throw new AppError(e.message, 500);
+            throw new AppError(e.message, e.status);
         }
     }
 
@@ -88,7 +88,7 @@ class MoviesService {
             }
             return movie;
         } catch (e) {
-            throw new AppError(e.message, 500);
+            throw new AppError(e.message, e.status);
         }
     }
 }
