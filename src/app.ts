@@ -4,7 +4,7 @@ import express from "express";
 import mongoose from "mongoose";
 
 import {MoviesController} from "./controllers/MoviesController";
-import {ControllerInterface} from "./controllers/ControllerInterface";
+import {IControllerInterface} from "./controllers/ControllerInterface";
 import {validateEnv} from "./utilities/validateEnv";
 import MoviesService from "./services/MoviesService";
 import errorMiddleware from "./middlewares/error";
@@ -13,7 +13,7 @@ import errorMiddleware from "./middlewares/error";
 class App {
     public app: express.Application;
 
-    constructor(controllers: ControllerInterface[]) {
+    constructor(controllers: IControllerInterface[]) {
         this.app = express();
 
         this.loadConfig();
@@ -59,9 +59,9 @@ class App {
             .catch((e) => console.log(e));
     }
 
-    private initControllers(controllers: ControllerInterface[]) {
+    private initControllers(controllers: IControllerInterface[]) {
         controllers.forEach((controller) => {
-            this.app.use(`/api/v1${controller.route}`, controller.router)
+            this.app.use(`/api/v1${controller.route}`, controller.router);
         });
     }
 
@@ -80,4 +80,4 @@ export const app: App = new App([
     new MoviesController(new MoviesService()),
 ]);
 
-app.listen()
+app.listen();

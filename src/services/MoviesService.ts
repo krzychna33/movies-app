@@ -2,20 +2,21 @@ import AddMovieDto from "../entities/Movie/AddMovieDto";
 import MovieModel from "../entities/Movie/MovieModel";
 import {AppError} from "../utilities/AppError";
 import axios from "axios";
-import {MovieDetails} from "../entities/Movie/MovieDetails";
 import mongoose from "mongoose";
+import {IMovieDetails} from "../entities/Movie/MovieDetails";
+import {IMovieDocument} from "../entities/Movie/MovieInterface";
 
 const {ObjectId} = mongoose.Types;
 
 class MoviesService {
 
-    public addNewMovie = async (body: AddMovieDto) => {
+    public addNewMovie = async (body: AddMovieDto): Promise<IMovieDocument> => {
         let movieDetails;
 
         try {
             movieDetails = await this.getMovieData(body.title, body.year);
         } catch (e) {
-            throw new AppError(e.message, 500);
+            movieDetails = {};
         }
 
         const movie = new MovieModel({
@@ -31,8 +32,8 @@ class MoviesService {
 
     }
 
-    public getMovieData = (title: string, year: number): Promise<MovieDetails | null> => {
-        return new Promise<MovieDetails | null>((resolve, reject) => {
+    public getMovieData = (title: string, year: number): Promise<IMovieDetails | {}> => {
+        return new Promise<IMovieDetails | {}>((resolve, reject) => {
             axios.get(`${process.env.OMDB_API_URL}?t=${title}&y=${year}&apiKey=${process.env.OMDB_API_KEY}`)
                 .then(response => {
                     if (response.status === 200 && response.data.Response === "True") {
@@ -58,16 +59,17 @@ class MoviesService {
                             imdbRating
                         })
                     } else {
-                        resolve()
+                        resolve({})
                     }
                 })
-                .catch(() => {
+                .catch((e) => {
+                    console.log(e.request);
                     reject({message: "External api error"});
                 })
         })
     }
 
-    getAllMovies = async () => {
+    getAllMovies = async (): Promise<IMovieDocument[]> => {
         try {
             return MovieModel.find();
         } catch (e) {
@@ -75,7 +77,7 @@ class MoviesService {
         }
     }
 
-    getMovie = async (id: string) => {
+    getMovie = async (id: string): Promise<IMovieDocument> => {
         if (!ObjectId.isValid(id)) {
             throw new AppError("Invalid id", 400);
         }

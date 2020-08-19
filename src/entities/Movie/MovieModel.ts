@@ -1,24 +1,30 @@
-import mongoose, {Schema, Document} from "mongoose";
-import {Movie, MovieDocument} from "./MovieInterface";
+import mongoose, {Schema} from "mongoose";
+import {IMovieDocument, IMovieModel} from "./MovieInterface";
 
 const movieDetailsSchema = new Schema({
     runtime: {
-        type: String
+        type: String,
+        default: null
     },
     genre: {
-        type: String
+        type: String,
+        default: null
     },
     director: {
-        type: String
+        type: String,
+        default: null
     },
     plot: {
-        type: String
+        type: String,
+        default: null
     },
     awards: {
-        type: String
+        type: String,
+        default: null
     },
     imdbRating: {
-        type: String
+        type: String,
+        default: null
     }
 })
 
@@ -31,9 +37,12 @@ const movieSchema = new Schema({
         type: Number,
         required: true
     },
-    details: movieDetailsSchema
+    details: {
+        type: movieDetailsSchema,
+        required: true
+    }
 });
 
-const MovieModel = mongoose.model<MovieDocument>('Movie', movieSchema);
+const MovieModel = mongoose.model<IMovieDocument, IMovieModel>('Movie', movieSchema);
 
 export default MovieModel;

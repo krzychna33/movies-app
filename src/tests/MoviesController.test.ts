@@ -23,14 +23,19 @@ describe("Movies Controller tests", () => {
             .expect(201)
             .expect((res) => {
                 expect(res.body.movie.title).to.equal(movieBody.title);
-                expect(res.body.movie).to.not.have.property("details");
+                expect(res.body.movie.details.awards).to.equal(null);
+                expect(res.body.movie.details.genre).to.equal(null);
+                expect(res.body.movie.details.runtime).to.equal(null);
+                expect(res.body.movie.details.director).to.equal(null);
+                expect(res.body.movie.details.imdbRating).to.equal(null);
+                expect(res.body.movie.details.plot).to.equal(null);
             })
             .end((err, res) => {
                 if (err) {
                     return done(err);
                 }
 
-                MovieModel.find({title: movieBody.title, year: movieBody.title})
+                MovieModel.find({title: movieBody.title, year: movieBody.year})
                     .then((movies) => {
                         expect(movies.length).to.equal(1);
                         done();
@@ -53,14 +58,13 @@ describe("Movies Controller tests", () => {
             .expect(201)
             .expect((res) => {
                 expect(res.body.movie.title).to.equal(movieBody.title);
-                expect(res.body.movie).to.have.property("details");
             })
             .end((err, res) => {
                 if (err) {
                     return done(err);
                 }
 
-                MovieModel.find({title: movieBody.title, year: movieBody.title})
+                MovieModel.find({title: movieBody.title, year: movieBody.year})
                     .then((movies) => {
                         expect(movies.length).to.equal(1);
                         done();
