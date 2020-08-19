@@ -18,8 +18,6 @@
 * run docker services with ``make run``, it will make node.js and mongodb running
 * to run tests type ``make test``
 
-Check **Makefile** for additional commends like ```stop, rebuild etc.```
-
 ### Live version
 
 [https://pacific-anchorage-48514.herokuapp.com/](https://pacific-anchorage-48514.herokuapp.com/)
