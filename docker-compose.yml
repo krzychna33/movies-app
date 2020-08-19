@@ -15,8 +15,6 @@ services:
       - movies-app-mongo
     links:
       - movies-app-mongo
-    environment:
-      MONGO_ADDRESS: movies-app-mongo
 
   movies-app-mongo:
     container_name: movies-app-mongo
