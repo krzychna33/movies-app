@@ -45,14 +45,8 @@ class App {
     }
 
     private connectWithDatabase() {
-        let databaseName = "movies-app";
 
-        if (process.env.NODE_ENV === "test") {
-            databaseName = "movies-app-test";
-        }
-
-        const connectionUri = `mongodb://${process.env.MONGO_ADDRESS}:27017/${databaseName}`;
-        mongoose.connect(connectionUri, {
+        mongoose.connect(`${process.env.MONGO_ADDRESS}`, {
             useNewUrlParser: true,
             useFindAndModify: false,
             useUnifiedTopology: true
