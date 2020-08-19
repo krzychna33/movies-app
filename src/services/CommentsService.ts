@@ -14,7 +14,7 @@ class CommentsService {
 
     public addNewComment = async (body: AddCommentDto): Promise<ICommentDocument> => {
         if (!ObjectId.isValid(body.movieId)) {
-            throw new AppError("Invalid id", 400);
+            throw new AppError("Invalid movie id", 400);
         }
 
         const associatedMovie = await MovieModel.findOne({_id: body.movieId});
