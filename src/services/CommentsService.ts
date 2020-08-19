@@ -6,16 +6,27 @@ import {
 import CommentModel from "../entities/Comment/CommentModel";
 import {AppError} from "../utilities/AppError";
 import mongoose from "mongoose";
+import MovieModel from "../entities/Movie/MovieModel";
 
 const {ObjectId} = mongoose.Types;
 
 class CommentsService {
 
     public addNewComment = async (body: AddCommentDto): Promise<ICommentDocument> => {
+        if (!ObjectId.isValid(body.movieId)) {
+            throw new AppError("Invalid id", 400);
+        }
+
+        const associatedMovie = await MovieModel.findOne({_id: body.movieId});
+
+        if (!associatedMovie) {
+            throw new AppError("Not found associated movie", 400);
+        }
+
         const comment = new CommentModel({
             ...body,
             date: new Date()
-        })
+        });
 
         try {
             return await comment.save();
