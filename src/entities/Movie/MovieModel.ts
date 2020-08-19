@@ -1,7 +1,7 @@
 import mongoose, {Schema} from "mongoose";
 import {IMovieDocument, IMovieModel} from "./MovieInterface";
 
-const movieDetailsSchema = new Schema({
+const MovieDetailsSchema = new Schema({
     runtime: {
         type: String,
         default: null
@@ -28,7 +28,7 @@ const movieDetailsSchema = new Schema({
     }
 })
 
-const movieSchema = new Schema({
+const MovieSchema = new Schema({
     title: {
         type: String,
         required: true
@@ -38,11 +38,11 @@ const movieSchema = new Schema({
         required: true
     },
     details: {
-        type: movieDetailsSchema,
+        type: MovieDetailsSchema,
         required: true
     }
 });
 
-const MovieModel = mongoose.model<IMovieDocument, IMovieModel>('Movie', movieSchema);
+const MovieModel = mongoose.model<IMovieDocument, IMovieModel>('Movie', MovieSchema);
 
 export default MovieModel;

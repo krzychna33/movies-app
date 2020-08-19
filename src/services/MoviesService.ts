@@ -63,7 +63,6 @@ class MoviesService {
                     }
                 })
                 .catch((e) => {
-                    console.log(e.request);
                     reject({message: "External api error"});
                 })
         })

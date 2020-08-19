@@ -8,6 +8,8 @@ import {IControllerInterface} from "./controllers/ControllerInterface";
 import {validateEnv} from "./utilities/validateEnv";
 import MoviesService from "./services/MoviesService";
 import errorMiddleware from "./middlewares/error";
+import {CommentsController} from "./controllers/CommentsController";
+import CommentsService from "./services/CommentsService";
 
 
 class App {
@@ -78,6 +80,7 @@ class App {
 
 export const app: App = new App([
     new MoviesController(new MoviesService()),
+    new CommentsController(new CommentsService())
 ]);
 
 app.listen();
